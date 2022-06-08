@@ -1,45 +1,34 @@
 using UnityEngine;
 
-[RequireComponent(typeof(Rigidbody2D),typeof(Animator))]
+[RequireComponent(typeof(Rigidbody2D))]
 public class Player : Creature
 {
-    private static readonly int IsRunningKey = Animator.StringToHash("isRunning");
-    private static readonly int IsGroundedKey = Animator.StringToHash("isGrounded");
-    private static readonly int YVelocity = Animator.StringToHash("yVelocity");
-
     [SerializeField] private LayerCheck _groundCheck;
     [SerializeField] private float _runSpeed;
     [SerializeField] private float _jumpSpeed;
-    
+
     private Rigidbody2D _rigidbody;
-    private Animator _animator;
-    private bool _isGrounded;
-    
+
+    public bool IsRunning { get; private set; }
+    public bool IsGrounded { get; private set; }
+
     private void Awake()
     {
         _rigidbody = GetComponent<Rigidbody2D>();
-        _animator = GetComponent<Animator>();
     }
 
     protected override void Update()
     {
         base.Update();
-        CheckSurroundings();
-        SetAnimatorStates();
+        CheckStates();
         Jump();
         Run();
     }
 
-    private void SetAnimatorStates()
+    private void CheckStates()
     {
-        _animator.SetFloat(YVelocity, _rigidbody.velocity.y);
-        _animator.SetBool(IsRunningKey, Direction.x != 0);
-        _animator.SetBool(IsGroundedKey, _isGrounded);
-    }
-
-    private void CheckSurroundings()
-    {
-        _isGrounded = _groundCheck.IsTouchingGround;
+        IsGrounded = _groundCheck.IsTouchingGround;
+        IsRunning = Direction.x != 0;
     }
 
     private void Run()
@@ -50,7 +39,7 @@ public class Player : Creature
 
     private void Jump()
     {
-        if (Input.GetButtonDown("Jump") && _isGrounded)
+        if (Input.GetButtonDown("Jump") && IsGrounded)
         {
             _rigidbody.velocity += new Vector2(Direction.x, _jumpSpeed);
         }

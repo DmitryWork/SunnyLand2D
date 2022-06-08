@@ -8,6 +8,13 @@ public class CoinSpawner : MonoBehaviour
     [SerializeField] private int _amount;
     [SerializeField] private float _timeToWait;
 
+    private WaitForSeconds _waitForSeconds;
+
+    private void Awake()
+    {
+        _waitForSeconds = new WaitForSeconds(_timeToWait);
+    }
+
     public void Spawn()
     {
         StartCoroutine(CreateObjects());
@@ -18,7 +25,7 @@ public class CoinSpawner : MonoBehaviour
         for (int i = 0; i < _amount; i++)
         {
             Instantiate(_coinPrefab, _location.transform.position, Quaternion.identity);
-            yield return new WaitForSeconds(_timeToWait);
+            yield return _waitForSeconds;
         }
     }
 }
