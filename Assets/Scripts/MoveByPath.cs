@@ -1,6 +1,6 @@
-using System;
 using UnityEngine;
 
+[RequireComponent(typeof(Creature))]
 public class MoveByPath : MonoBehaviour
 {
     [SerializeField] private Transform _path;

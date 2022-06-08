@@ -1,5 +1,6 @@
 using UnityEngine;
 
+[RequireComponent(typeof(Rigidbody2D),typeof(Animator))]
 public class Player : Creature
 {
     private static readonly int IsRunningKey = Animator.StringToHash("isRunning");
