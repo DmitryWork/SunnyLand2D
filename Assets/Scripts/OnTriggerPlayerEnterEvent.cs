@@ -1,7 +1,7 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class OnTriggerEnterEvent : MonoBehaviour
+public class OnTriggerPlayerEnterEvent : MonoBehaviour
 {
     [SerializeField] private UnityEvent _action;
 
