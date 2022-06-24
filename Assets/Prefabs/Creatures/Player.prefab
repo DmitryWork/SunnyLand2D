@@ -189,6 +189,7 @@ MonoBehaviour:
   _groundCheck: {fileID: 891601898}
   _runSpeed: 6
   _jumpSpeed: 16
+  _knockPower: 8
 --- !u!1 &8349054631574418138
 GameObject:
   m_ObjectHideFlags: 0
@@ -254,3 +255,6 @@ MonoBehaviour:
   _whatIsGround:
     serializedVersion: 2
     m_Bits: 64
+  _whatIsEnemyHead:
+    serializedVersion: 2
+    m_Bits: 1024

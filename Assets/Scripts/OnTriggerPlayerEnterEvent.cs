@@ -7,7 +7,7 @@ public class OnTriggerPlayerEnterEvent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.GetComponent<Player>())
+        if (other.TryGetComponent(out Player player))
         {
             _action?.Invoke();
         }
